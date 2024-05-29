@@ -1,6 +1,5 @@
 <?php
-define("WEBROOT", "http://localhost:8000");
-require_once("../models/article.model.php");
+define("WEBROOT", "http://localhost:8000/");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +8,8 @@ require_once("../models/article.model.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>Page avec Menu à Gauche</title>
+    <link rel="stylesheet" href="<?=WEBROOT?>css/style.css">
+    <title>Gestion Atelier Couture</title>
     <style>
         .sidebar {
             height: 100vh;
@@ -23,28 +23,28 @@ require_once("../models/article.model.php");
     <div class="container-fluid">
         <div class="row">
             <!-- Menu à gauche -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar background-color-indigo">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Lister</a>
+                            <a class="nav-link active color-honeydew" href="<?=WEBROOT?>?action=liste">Lister</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Approvisionnement</a>
+                            <a class="nav-link color-honeydew" href="<?=WEBROOT?>?action=form-new-article">Approvisionnement</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Messages</a>
+                            <a class="nav-link color-honeydew" href="#">Messages</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Paramètres</a>
+                            <a class="nav-link color-honeydew" href="#">Paramètres</a>
                         </li>
                     </ul>
                 </div>
             </nav>
 
             <!-- Contenu principal -->
-            <main class="col-md-9 col-lg-10 ml-sm-auto px-md-4">
-                
+            <main class="col-md-9 col-lg-10 ml-sm-auto px-md-4 background-color-honeydew ">
+                <?=require_once("../controllers/article.controller.php");?>
             </main>
         </div>
     </div>
