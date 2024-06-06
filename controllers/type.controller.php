@@ -7,6 +7,7 @@ class TypeController extends Controller
     private TypeModel $typeModel;
     public function __construct()
     {
+        parent::__construct();
         $this->typeModel = new TypeModel();
         $this->load();
     }
@@ -19,7 +20,7 @@ class TypeController extends Controller
                 unset($_REQUEST["action"]);
                 unset($_REQUEST["controller"]);
                 $this->store($_REQUEST);
-                $this->redirectToRouter("controller=type&action=liste");
+                parent::redirectToRouter("controller=type&action=liste");
             } elseif ($_REQUEST["action"] == "delete-type") {
                 $this->supprimer($_REQUEST["idType"]);
                 $this->redirectToRouter("controller=type&action=liste");
@@ -40,14 +41,27 @@ class TypeController extends Controller
 
     private function store(array $data)
     {
-        $this->typeModel->save($data);
+        Validator::isEmpty($data["nomType"], "nomType");
+        if (Validator::isValid()) {
+            $type = $this->typeModel->findByName("nomType", $data["nomType"]);
+            if ($type) {
+                Validator::add("nomType", "La valeur existe déjà!");
+                Session::add("errors", Validator::$errors);
+            } else {
+                $this->typeModel->save($data);
+            }
+        } else {
+            Session::add("errors", Validator::$errors);
+        }
     }
 
-    private function details($value) {
+    private function details($value)
+    {
         $this->renderView("../views/types/update", ["type" => $this->typeModel->findOne($value)]);
     }
 
-    private function modify(array $data) {
+    private function modify(array $data)
+    {
         $this->typeModel->update($data);
     }
 

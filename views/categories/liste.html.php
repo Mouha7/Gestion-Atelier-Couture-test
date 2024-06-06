@@ -1,3 +1,10 @@
+<?php
+$errors = [];
+if(Session::get("errors")) {
+    $errors = Session::get("errors");
+}
+?>
+
 <div class="color-indigo d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Liste des Catégories d'Article</h1>
 </div>
@@ -7,7 +14,10 @@
             <form method="post" action="<?=WEBROOT?>">
                 <div class="w-full d-flex justify-content-between align-items-center">
                     <label for="type" class="form-label">Catégorie</label>
-                    <input type="text" class="form-control ml-2" name="nomCategorie" id="type" />
+                    <input type="text" class="form-control ml-2 <?=add_class_invalid('nomCategorie')?>" name="nomCategorie" id="type" />
+                    <div id="validationServerUsernameFeedback" class="invalid-feedback ml-2 my-0">
+                        <?=$errors["nomCategorie"]??""?>
+                    </div>
                     <input type="hidden" name="action" value="save-categorie">
                     <input type="hidden" name="controller" value="categorie">
                     <button type="submit" value="btnSave" class="btn color-honeydew background-color-indigo ml-4">Créer</button>
@@ -46,3 +56,4 @@
         </table>
     </div>
 </div>
+<?php Session::remove("errors");?>

@@ -6,6 +6,7 @@ class CategorieController extends Controller {
     private CategorieModel $categorieModel;
 
     public function __construct() {
+        parent::__construct();
         $this->categorieModel = new CategorieModel();
         $this->load();
     }
@@ -42,7 +43,18 @@ class CategorieController extends Controller {
 
     private function store(array $data)
     {
-        $this->categorieModel->save($data);
+        Validator::isEmpty($data["nomCategorie"], "nomCategorie");
+        if(Validator::isValid()) {
+            $categorie = $this->categorieModel->findByName("nomCategorie", $data["nomCategorie"]);
+            if($categorie) {
+                Validator::add("nomCategorie", "La valeur existe déjà!");
+                Session::add("errors", Validator::$errors);
+            } else {
+                $this->categorieModel->save($data);
+            }
+        } else {
+            Session::add("errors", Validator::$errors);
+        }
     }
 
     private function details($value) {

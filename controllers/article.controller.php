@@ -10,6 +10,7 @@ class ArticleController extends Controller {
     private CategorieModel $categorieModel;
 
     public function __construct() {
+        parent::__construct();
         $this->articleModel = new ArticleModel();
         $this->typeModel = new TypeModel();
         $this->categorieModel = new CategorieModel();
@@ -26,7 +27,6 @@ class ArticleController extends Controller {
                 unset($_REQUEST["action"]);
                 unset($_REQUEST["btnSave"]);
                 $this->store($_REQUEST);
-                $this->redirectToRouter("controller=article&action=liste");
             } elseif ($_REQUEST["action"] == "delete-article") {
                 $this->supprimer($_REQUEST["idArticle"]);
                 $this->redirectToRouter("controller=article&action=liste");
@@ -53,7 +53,20 @@ class ArticleController extends Controller {
     }
 
     private function store(array $data):void {
-        $this->articleModel->save($data);
+        Validator::isEmpty($data["libelle"],"libelle");
+        if(Validator::isValid()) {
+            $libelle = $this->articleModel->findByName("libelle", $data["libelle"]);
+            if($libelle) {
+                Validator::add("libelle", "Le libelle existe déjà!");
+                Session::add("errors", Validator::$errors);
+            } else {
+                $this->articleModel->save($data);
+                $this->redirectToRouter("controller=article&action=liste");
+            }
+        } else {
+            Session::add("errors", Validator::$errors);
+        }
+        $this->redirectToRouter("controller=article&action=form-new-article");
     }
 
     private function details($value) {
