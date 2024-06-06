@@ -11,6 +11,9 @@ class ArticleController extends Controller {
 
     public function __construct() {
         parent::__construct();
+        if(!Autorisation::isConnect()) {
+            $this->redirectToRouter("controller=security&action=show-form");
+        }
         $this->articleModel = new ArticleModel();
         $this->typeModel = new TypeModel();
         $this->categorieModel = new CategorieModel();

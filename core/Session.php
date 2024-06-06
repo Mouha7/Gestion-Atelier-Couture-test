@@ -32,6 +32,7 @@ class Session
 
     public static function closeSession()
     {
+        unset($_SESSION["userConnect"]);
         session_destroy();
     }
 }

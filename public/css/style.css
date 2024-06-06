@@ -54,3 +54,11 @@
 .background-color-sunglow {
     background-color: var(--color-sunglow) !important;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}

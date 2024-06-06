@@ -7,6 +7,9 @@ class CategorieController extends Controller {
 
     public function __construct() {
         parent::__construct();
+        if(!Autorisation::isConnect()) {
+            $this->redirectToRouter("controller=security&action=show-form");
+        }
         $this->categorieModel = new CategorieModel();
         $this->load();
     }
