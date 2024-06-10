@@ -1,4 +1,7 @@
 <?php
+use Macbook\Core\Session;
+use Macbook\Core\Autorisation;
+
 function add_class_invalid(string $nameField) {
     echo isset(Session::get("errors")[$nameField])?"is-invalid":"";
 }
@@ -8,7 +11,7 @@ function add_class_hidden(string $nameField) {
 }
 
 function add_class_hidden_lien(string $nameField) {
-    echo !Autorisation::hasRole($nameField)?"visually-hidden":"";
+    echo !Autorisation::hasRole($nameField)?"hide":"";
 }
 
 function dd(mixed $data) {

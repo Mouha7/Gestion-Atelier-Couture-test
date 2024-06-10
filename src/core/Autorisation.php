@@ -1,4 +1,7 @@
 <?php
+namespace Macbook\Core;
+
+use Macbook\Core\Session;
 
 class Autorisation {
     public static function isConnect():bool {

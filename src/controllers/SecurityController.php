@@ -1,17 +1,26 @@
 <?php
-require_once "../models/user.model.php";
-require_once "../core/Controller.php";
 
-class SecurityController extends Controller {
+namespace Macbook\Controllers;
+
+use Macbook\Core\Session;
+use Macbook\Core\Validator;
+use Macbook\Core\Controller;
+use Macbook\Models\UserModel;
+
+
+class SecurityController extends Controller
+{
     private UserModel $userModel;
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->layout = "login";
         $this->userModel = new UserModel();
         $this->load();
     }
 
-    public function load() {
+    public function load()
+    {
         if (isset($_REQUEST["action"])) {
             if ($_REQUEST["action"] == "login") {
                 $this->login($_REQUEST);
@@ -25,23 +34,26 @@ class SecurityController extends Controller {
         }
     }
 
-    private function showForm() {
+    private function showForm()
+    {
         $this->renderView("../views/security/form");
     }
 
-    private function logout() {
+    private function logout()
+    {
         Session::closeSession();
         $this->redirectToRouter("controller=security&action=show-form");
     }
 
-    private function login(array $data) {
-        if(!Validator::isEmpty($data["login"], "login")) {
-            Validator::isEmail($data["login"],"login"); 
+    private function login(array $data)
+    {
+        if (!Validator::isEmpty($data["login"], "login")) {
+            Validator::isEmail($data["login"], "login");
         }
         Validator::isEmpty($data["password"], "password");
-        if(Validator::isValid()) {
+        if (Validator::isValid()) {
             $userConnect = $this->userModel->findByLoginAndPassword($data["login"], $data["password"]);
-            if($userConnect) {
+            if ($userConnect) {
                 Session::add("userConnect", $userConnect);
                 $this->redirectToRouter("controller=article&action=liste");
             } else {

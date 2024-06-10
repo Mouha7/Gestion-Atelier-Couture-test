@@ -1,4 +1,6 @@
 <?php
+namespace Macbook\Core;
+
 class Validator
 {
     public static array $errors = [];

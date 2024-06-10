@@ -1,4 +1,6 @@
 <?php
+namespace Macbook\Core;
+
 class Controller
 {
     protected string $layout;
@@ -20,5 +22,10 @@ class Controller
         require_once("$view.html.php");
         $content_view = ob_get_clean();
         require_once "../views/layout/$this->layout.layout.php";
+    }
+
+    public function renderJson(array $data = [])
+    {
+        echo json_encode($data);
     }
 }

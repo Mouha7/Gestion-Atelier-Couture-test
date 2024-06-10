@@ -1,6 +1,12 @@
 <?php
-require_once("../models/categorie.model.php");
-require_once("../core/Controller.php");
+namespace Macbook\Controllers;
+define("LISTE", "controller=categorie&action=liste");
+
+use Macbook\Core\Session;
+use Macbook\Core\Validator;
+use Macbook\Core\Controller;
+use Macbook\Core\Autorisation;
+use Macbook\Models\CategorieModel;
 
 class CategorieController extends Controller {
     private CategorieModel $categorieModel;
@@ -24,17 +30,17 @@ class CategorieController extends Controller {
                 unset($_REQUEST["controller"]);
                 var_dump($_REQUEST);
                 $this->store($_REQUEST);
-                $this->redirectToRouter("controller=categorie&action=liste");
+                $this->redirectToRouter(LISTE);
             } elseif ($_REQUEST["action"] == "delete-categorie") {
                 $this->supprimer($_REQUEST["idCategorie"]);
-                $this->redirectToRouter("controller=categorie&action=liste");
+                $this->redirectToRouter(LISTE);
             } elseif ($_REQUEST["action"] == "detail-categorie") {
                 $this->details($_REQUEST["idCategorie"]);
             } elseif ($_REQUEST["action"] == "update-categorie") {
                 unset($_REQUEST["action"]);
                 unset($_REQUEST["controller"]);
                 $this->modify($_REQUEST);
-                $this->redirectToRouter("controller=categorie&action=liste");
+                $this->redirectToRouter(LISTE);
             }
         }
     }

@@ -1,6 +1,16 @@
 <?php
-require_once("../models/type.model.php");
-require_once("../core/Controller.php");
+
+namespace Macbook\Controllers;
+define("LISTE","controller=type&action=liste");
+
+use Macbook\Core\Session;
+use Macbook\Core\Validator;
+use Macbook\Core\Controller;
+use Macbook\Core\Autorisation;
+use Macbook\Models\TypeModel;
+
+
+
 
 class TypeController extends Controller
 {
@@ -8,7 +18,7 @@ class TypeController extends Controller
     public function __construct()
     {
         parent::__construct();
-        if(!Autorisation::isConnect()) {
+        if (!Autorisation::isConnect()) {
             $this->redirectToRouter("controller=security&action=show-form");
         }
         $this->typeModel = new TypeModel();
@@ -23,17 +33,17 @@ class TypeController extends Controller
                 unset($_REQUEST["action"]);
                 unset($_REQUEST["controller"]);
                 $this->store($_REQUEST);
-                parent::redirectToRouter("controller=type&action=liste");
+                parent::redirectToRouter(LISTE);
             } elseif ($_REQUEST["action"] == "delete-type") {
                 $this->supprimer($_REQUEST["idType"]);
-                $this->redirectToRouter("controller=type&action=liste");
+                $this->redirectToRouter(LISTE);
             } elseif ($_REQUEST["action"] == "detail-type") {
                 $this->details($_REQUEST["idType"]);
             } elseif ($_REQUEST["action"] == "update-type") {
                 unset($_REQUEST["action"]);
                 unset($_REQUEST["controller"]);
                 $this->modify($_REQUEST);
-                $this->redirectToRouter("controller=type&action=liste");
+                $this->redirectToRouter(LISTE);
             }
         }
     }

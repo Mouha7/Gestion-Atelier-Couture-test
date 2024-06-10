@@ -1,4 +1,5 @@
 <?php
+namespace Macbook\Core;
 
 class Session
 {

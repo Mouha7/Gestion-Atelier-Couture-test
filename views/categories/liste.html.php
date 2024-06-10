@@ -1,4 +1,5 @@
 <?php
+use Macbook\Core\Session;
 $errors = [];
 if(Session::get("errors")) {
     $errors = Session::get("errors");
@@ -30,9 +31,9 @@ if(Session::get("errors")) {
         <table class="table background-color-white color-indigo">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Action</th>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,9 +41,9 @@ if(Session::get("errors")) {
                 <?php foreach ($categorie_array as $value) : ?>
                     <?php $counter++?>
                     <tr class="">
-                        <td scope="row"><?= $counter ?></td>
-                        <td scope="row"><?= $value["nomCategorie"] ?></td>
-                        <td scope="row">
+                        <td><?= $counter ?></td>
+                        <td><?= $value["nomCategorie"] ?></td>
+                        <td>
                             <form action="post" method="<?=WEBROOT?>">
                                 <a href="<?=WEBROOT?>?controller=categorie&action=detail-categorie&idCategorie=<?=$value["idCategorie"]?>" class="btn background-color-sunglow">Modifier</a>
                                 <input type="hidden" name="action" value="delete-categorie">
@@ -57,3 +58,4 @@ if(Session::get("errors")) {
     </div>
 </div>
 <?php Session::remove("errors");?>
+

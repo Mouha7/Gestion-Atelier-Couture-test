@@ -1,12 +1,15 @@
+<?php
+use Macbook\Core\Session;
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="<?= WEBROOT ?>images/Royal Tailor - Favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="<?= WEBROOT ?>css/style.css">
+    <link rel="stylesheet" href="<?= WEBROOT ?>css/output.css">
     <title>Gestion Atelier Couture</title>
     <style>
         .sidebar {
@@ -36,8 +39,8 @@
                         <li class="nav-item">
                             <a class="nav-link color-honeydew" href="<?= WEBROOT ?>?controller=type&action=liste">Type</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link color-honeydew" href="#">Approvisionnement</a>
+                        <li class="nav-item <?=add_class_hidden_lien('Admin')?>">
+                            <a class="nav-link color-honeydew " href="#">Approvisionnement</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link color-honeydew" href="#">Paramètres</a>

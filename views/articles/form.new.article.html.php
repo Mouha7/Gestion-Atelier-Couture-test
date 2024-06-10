@@ -1,4 +1,5 @@
 <?php
+use Macbook\Core\Session;
 $errors = [];
 if (Session::get("errors")) {
     $errors = Session::get("errors");
@@ -28,7 +29,7 @@ if (Session::get("errors")) {
             <div class="d-flex align-items-center" style="gap: 20px;">
                 <label for="type" class="form-label mb-0">Type</label>
                 <select name="typeId" class="form-control" aria-label="Default select example" id="type">
-                    <option selected></option>
+                    <option selected>...</option>
                     <?php foreach ($type_array as $type) : ?>
                         <option value="<?= $type["idType"] ?>"><?= $type["nomType"] ?></option>
                     <?php endforeach ?>
@@ -37,7 +38,7 @@ if (Session::get("errors")) {
             <div class="d-flex align-items-center" style="gap: 20px;">
                 <label for="cat" class="form-label mb-0">Catégorie</label>
                 <select name="categorieId" class="form-control" aria-label="Default select example" id="cat">
-                    <option selected></option>
+                    <option selected>...</option>
                     <?php foreach ($categorie_array as $categorie) : ?>
                         <option value="<?= $categorie["idCategorie"] ?>"><?= $categorie["nomCategorie"] ?></option>
                     <?php endforeach ?>

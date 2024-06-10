@@ -1,4 +1,5 @@
 <?php
+use Macbook\Core\Session;
 $errors = [];
 if (Session::get("errors")) {
     $errors = Session::get("errors");
@@ -6,6 +7,7 @@ if (Session::get("errors")) {
 ?>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Connexion</h1>
+    <img src="<?=WEBROOT?>images/Royal Tailor - White.png" alt="Logo" style="width: 30%;">
 </div>
 <div class="w-full d-flex justify-content-center align-items-center mt-4">
     <form action="<?= WEBROOT ?>" method="post" class="w-75">
@@ -34,3 +36,4 @@ if (Session::get("errors")) {
     </form>
 </div>
 <?php Session::remove("errors"); ?>
+

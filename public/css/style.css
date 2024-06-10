@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
     --color-indigo: #540D6E;
     --color-red-crayola: #EE4266;

@@ -1,19 +1,26 @@
 <?php
-require_once "../core/Model.php";
+
+namespace Macbook\Models;
+
+use Macbook\Core\Model;
+
+
 
 class CategorieModel extends Model
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->getConnexion();
         $this->table = "categorie";
     }
 
-    public function save(array $data): void {
+    public function save(array $data): void
+    {
         extract($data);
         $this->executeUpdate("INSERT INTO `categorie` (`nomCategorie`) VALUES ('$nomCategorie');");
     }
 
-    public function findOne($value): array|false 
+    public function findOne($value): array|false
     {
         return $this->executeSelect("SELECT * FROM `categorie` WHERE `categorie`.`idCategorie` = $value", true);
     }

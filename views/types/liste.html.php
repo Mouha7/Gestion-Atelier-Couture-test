@@ -1,4 +1,5 @@
 <?php
+use Macbook\Core\Session;
 $errors = [];
 if(Session::get("errors")) {
     $errors = Session::get("errors");
@@ -31,9 +32,9 @@ if(Session::get("errors")) {
         <table class="table background-color-white color-indigo">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Action</th>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,9 +42,9 @@ if(Session::get("errors")) {
                 <?php foreach ($type_array as $type) : ?>
                     <?php $counter++; ?>
                     <tr class="">
-                        <td scope="row"><?= $counter ?></td>
-                        <td scope="row"><?= $type["nomType"] ?></td>
-                        <td scope="row">
+                        <td><?= $counter ?></td>
+                        <td><?= $type["nomType"] ?></td>
+                        <td>
                             <form action="post" method="<?= WEBROOT ?>">
                                 <a href="<?= WEBROOT ?>?controller=type&action=detail-type&idType=<?= $type["idType"] ?>" class="btn background-color-sunglow">Modifier</a>
                                 <input type="hidden" name="action" value="delete-type">
@@ -58,3 +59,5 @@ if(Session::get("errors")) {
     </div>
 </div>
 <?=Session::remove("errors");?>
+
+<script src="<?=WEBROOT?>js/type.js"></script>
