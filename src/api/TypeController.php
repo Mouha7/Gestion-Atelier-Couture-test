@@ -53,7 +53,7 @@ class TypeController extends Controller
     }
 
     private function store(array $data)
-    {
+    { 
         Validator::isEmpty($data["nomType"], "nomType");
         if (Validator::isValid()) {
             $type = $this->typeModel->findByName("nomType", $data["nomType"]);
